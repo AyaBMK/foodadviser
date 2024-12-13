@@ -31,7 +31,7 @@ const ImageUpload = () => {
 
   return (
     <div className="image-upload-container">
-      <h2>Uploader une Image</h2>
+      <h2 className="h2_globalUpload">Uploader une Image</h2>
       <form onSubmit={handleSubmit} className="image-upload-form">
         <input
           type="file"

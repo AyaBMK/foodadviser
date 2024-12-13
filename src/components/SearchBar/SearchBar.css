@@ -1,0 +1,28 @@
+/* src/components/SearchBar.css */
+
+.searchbar-container {
+    width: 100%; /* Utilise toute la largeur disponible */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .searchbar-form {
+    width: 80%; /* Prendre toute la largeur du parent */
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: transparent; /* Fond transparent */
+  }
+  
+  .searchbar-input {
+    width: 100%; /* L'input prend toute la largeur de son parent */
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+  }
+  

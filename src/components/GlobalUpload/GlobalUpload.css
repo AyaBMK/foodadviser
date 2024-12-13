@@ -1,0 +1,83 @@
+
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .searchbar-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .searchbar-text {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    color: green;
+  }
+  h2 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    color: green;
+  }
+  
+  .searchbar-form {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: transparent; /* Fond transparent pour la barre de recherche */
+    width: 80%;
+  }
+  
+  .searchbar-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .searchbar-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .searchbar-button:hover {
+    background-color: #45a049;
+  }
+  
+  .upload-camera-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 80%;
+    margin-top: 20px;
+  }
+  
+  .image-upload-container,
+  .camera-capture-container {
+    background: none; /* Assurez-vous qu'il n'y a pas de fond blanc ici */
+    padding: 20px;
+    width: 100%;
+    max-width: 500px; /* Limiter la largeur si nécessaire */
+    box-shadow: none; /* Supprimer toute ombre */
+  }

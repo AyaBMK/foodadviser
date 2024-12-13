@@ -1,0 +1,44 @@
+/* src/components/ImageUpload.css */
+.image-upload-container {
+    background: none; /* Assurez-vous qu'il n'y a pas de fond blanc */
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: none;
+  }
+  
+  .image-upload-container h2 {
+    text-align: center;
+  }
+  
+  .image-input {
+    display: block;
+    margin: 10px auto;
+  }
+  
+  .image-preview-container {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .image-preview {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+  }
+  
+  .submit-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+  

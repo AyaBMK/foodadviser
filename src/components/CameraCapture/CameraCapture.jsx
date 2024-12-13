@@ -1,7 +1,8 @@
 // src/CameraCapture.jsx
 import React, { useState, useRef } from 'react';
 import './CameraCapture.css';  // Assurez-vous d'importer les styles ici
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
 const CameraCapture = () => {
   const [isCameraOn, setIsCameraOn] = useState(false);
@@ -40,8 +41,12 @@ const CameraCapture = () => {
 
   return (
     <div className="camera-capture">
-      <h2>Prendre une photo de votre frigo</h2>
-      <div className="camera-container">
+      <h2 className="h2_globalUpload">Prendre une photo de votre frigo</h2>
+      <div className="camera-container, camera-capture-container">
+      <FontAwesomeIcon icon={faCamera} size="3x" className="camera-icon" />
+      {/* <p className="camera-capture-text">Capturez une image</p>git  */}
+
+
         {!isCameraOn ? (
           <button onClick={startCamera}>Démarrer la caméra</button>
         ) : (
