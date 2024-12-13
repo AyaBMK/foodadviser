@@ -1,0 +1,59 @@
+.card-image-lst{
+    width: 245;
+    height: 245;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.card-ingredient-container {
+    position: relative;
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; 
+    /* gap: 10px;  */
+    /* max-width: 1200px;  */
+    margin-top: 10px;
+}
+
+.card-ingredient {
+    position: relative;
+    width: 200px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    text-align: center;
+    margin: 10px;
+}
+
+.ingredient-btn {
+    position: absolute; 
+    bottom: -15px; 
+    right: -15px;  
+    width: 40px;
+    height: 40px;
+    background-color: #45AA6D;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+
+
+.card-title {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+
+.ingredient-btn:hover,
+.ingredient-btn:active {
+    background-color: #368e58;
+    transform: scale(1.1);
+}
