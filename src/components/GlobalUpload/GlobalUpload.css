@@ -8,6 +8,9 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: 1200px 400px; /* L'image aura une taille de 400px par 400px */
+
+    background-image: url("../../assets/1557910681-12914.webp");
   }
   
   .searchbar-container {
@@ -25,7 +28,7 @@
     text-align: center;
     color: green;
   }
-  h2 {
+  h2_globalUpload {
     font-size: 40px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -80,4 +83,11 @@
     width: 100%;
     max-width: 500px; /* Limiter la largeur si nécessaire */
     box-shadow: none; /* Supprimer toute ombre */
+  }
+  /* Media Query pour les petits écrans */
+@media (max-width: 768px) {
+    .upload-camera-container {
+      flex-direction: column;
+      width: 100%;
+    }
   }

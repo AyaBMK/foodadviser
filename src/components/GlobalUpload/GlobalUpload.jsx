@@ -1,8 +1,14 @@
+import React from "react"
+import ImageUpload from "../ImageUpload/ImageUpload"
+import CameraCapture from "../CameraCapture/CameraCapture"
+import SearchBar from "../SearchBar/SearchBar"
 
+
+import "./GlobalUpload.css"
 
 export default function GlobalUpload() {
   return (
-    <div className="app-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <div className="app-container">
     <div className="searchbar-container">
       <SearchBar />
     </div>
@@ -14,6 +20,6 @@ export default function GlobalUpload() {
         <CameraCapture />
       </div>
     </div>
-   </div>
+    </div>
   )
 }

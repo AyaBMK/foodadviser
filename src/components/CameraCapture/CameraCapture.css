@@ -1,30 +1,83 @@
-/* src/components/CameraCapture.css */
-
 .camera-capture-container {
-    position: relative;
-    width: 100%;
-    height: 300px; /* Ajustez la hauteur */
+  position: relative;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 8px;
+  padding: 20px;
+  border: 2px solid green;
+  background-color: #f0f8ff;
+}
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border-radius: 8px;
-    padding: 20px;
+.camera-icon {
+  position: absolute;
+  font-size: 80px;
+  color: #0ca156;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.camera-capture-text {
+  position: absolute;
+  bottom: 20px;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 1;
+}
+
+h2 {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: green;
+}
+
+.video-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
+  color: green;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Media Query pour les petits écrans */
+@media (max-width: 768px) {
+  .camera-capture-container {
+    height: auto;
+    padding: 15px;
   }
-  
+
   .camera-icon {
-    position: absolute;
-    font-size: 80px; /* Ajustez la taille de l'icône */
-    color: #0ca156; /* Couleur de l'icône */
+    font-size: 60px;
   }
-  
-  .camera-capture-text {
-    position: absolute;
-    bottom: 20px;
-    color: #333;
-    font-size: 24px;
-    font-weight: bold;
-    z-index: 1;
+
+  button {
+    width: 100%; /* Étendre les boutons à la largeur du parent */
   }
-  
+}

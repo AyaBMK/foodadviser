@@ -42,7 +42,7 @@ const CameraCapture = () => {
   return (
     <div className="camera-capture">
       <h2 className="h2_globalUpload">Prendre une photo de votre frigo</h2>
-      <div className="camera-container, camera-capture-container">
+      <div className="camera-container">
       <FontAwesomeIcon icon={faCamera} size="3x" className="camera-icon" />
       {/* <p className="camera-capture-text">Capturez une image</p>git  */}
 

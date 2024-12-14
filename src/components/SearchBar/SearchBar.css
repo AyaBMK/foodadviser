@@ -1,28 +1,59 @@
-/* src/components/SearchBar.css */
-
 .searchbar-container {
-    width: 100%; /* Utilise toute la largeur disponible */
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.searchbar-form {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: transparent;
+}
+
+.searchbar-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.searchbar-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.searchbar-button:hover {
+  background-color: #45a049;
+}
+
+/* Media Query pour les petits écrans */
+@media (max-width: 768px) {
+  .searchbar-container {
+    flex-direction: column;
   }
-  
+
   .searchbar-form {
-    width: 80%; /* Prendre toute la largeur du parent */
-    display: flex;
-    align-items: center;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 5px;
-    background-color: transparent; /* Fond transparent */
+    width: 100%;
   }
-  
+
   .searchbar-input {
-    width: 100%; /* L'input prend toute la largeur de son parent */
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
+    padding: 15px;
+    font-size: 18px;
   }
   
+  .searchbar-button {
+    width: 100%;
+    padding: 15px;
+  }
+}

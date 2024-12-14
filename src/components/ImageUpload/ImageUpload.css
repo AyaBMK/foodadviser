@@ -1,44 +1,89 @@
-/* src/components/ImageUpload.css */
 .image-upload-container {
-    background: none; /* Assurez-vous qu'il n'y a pas de fond blanc */
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  margin: 0 auto;
+  background-color: #f0f8ff;
+  border: 2px solid green;
+}
+
+.image-upload-container h2 {
+  font-size: 25px;
+  margin-bottom: 20px;
+  color: green;
+  text-align: center;
+}
+
+/* Formulaire pour l'upload */
+.image-upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Champ de saisie pour l'image */
+.image-input {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.image-input:focus {
+  border-color: #007bff;
+}
+
+/* Prévisualisation de l'image */
+.image-preview-container {
+  margin-bottom: 20px;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Bouton pour soumettre l'image */
+.submit-button {
+  padding: 10px 20px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.submit-button:hover {
+  background-color: white;
+  color: green;
+}
+
+/* Media Query pour les petits écrans */
+@media (max-width: 768px) {
+  .image-upload-container {
     width: 100%;
-    max-width: 500px;
-    box-shadow: none;
-  }
-  
-  .image-upload-container h2 {
-    text-align: center;
-  }
-  
-  .image-input {
-    display: block;
-    margin: 10px auto;
+    padding: 10px;
   }
   
   .image-preview-container {
-    margin-top: 10px;
-    text-align: center;
-  }
-  
-  .image-preview {
     max-width: 100%;
-    max-height: 200px;
-    object-fit: cover;
   }
-  
+
   .submit-button {
-    display: block;
     width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
   }
-  
-  .submit-button:hover {
-    background-color: #45a049;
-  }
-  
+}
