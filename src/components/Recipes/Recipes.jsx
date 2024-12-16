@@ -6,7 +6,7 @@ export default function Recipes() {
   return (
     <>
      <div className="container">
-        <h2 className="margin-top">Nos recettes</h2>
+        <h2 className="title-recipes">Nos recettes</h2>
         <div className="card-container">
             <div className="card card-recipe">
                 <img src={toast} alt=""/>

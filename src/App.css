@@ -10,35 +10,7 @@
     margin-right: auto; 
     margin-left: auto; 
 }
-  
-.card {
-    position: relative;
-    width: 200px; /* Ajuste cette valeur selon la largeur souhaitée */
-    border-radius: 20px;
-    /* overflow: hidden; */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
-    text-align: center;
-    margin: 10px;
-    transition: transform 0.3s ease;
-}
 
-.card img {
-    width: 100%;
-    height: auto;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
 
-.card-content {
-    margin: 10px 0;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-}
-
-.card:hover {
-    /* transform: scale(1.05); */
-}
 
 

@@ -6,10 +6,11 @@
     align-items: center;
     min-height: 100vh;
     background-size: cover;
-    background-position: center;
+    /* background-position: center; */
     background-repeat: no-repeat;
-    background-size: 1200px 400px; /* L'image aura une taille de 400px par 400px */
-
+    background-size: 1200px 600px; /* Limite la taille de l'image */
+    position: relative; /* Important pour positionner les éléments à l'intérieur */
+    background-position: top center;
     background-image: url("../../assets/1557910681-12914.webp");
   }
   
@@ -26,14 +27,14 @@
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
-    color: green;
+    color: #46ab57;
   }
   h2_globalUpload {
     font-size: 40px;
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
-    color: green;
+    color: #46ab57;
   }
   
   .searchbar-form {
@@ -83,6 +84,9 @@
     width: 100%;
     max-width: 500px; /* Limiter la largeur si nécessaire */
     box-shadow: none; /* Supprimer toute ombre */
+    height: 250px; /* Limiter la hauteur pour ne pas dépasser l'image de fond */
+    top: -120px; /* Décale le composant vers le haut */
+
   }
   /* Media Query pour les petits écrans */
 @media (max-width: 768px) {
@@ -90,4 +94,8 @@
       flex-direction: column;
       width: 100%;
     }
+    .camera-capture-container {
+        height: auto; /* Permet au composant de s'adapter à la taille de l'écran */
+        top: 0; /* Annule le décalage pour les petits écrans */
+      }
   }

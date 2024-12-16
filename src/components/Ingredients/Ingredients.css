@@ -1,21 +1,26 @@
 .card-ingredient-container {
-    position: relative;
     display: flex;
-    justify-content: center; 
     flex-wrap: wrap; 
-    /* gap: 10px;  */
-    /* max-width: 1200px;  */
-    margin-top: 10px;
+    justify-content: space-between; 
+    gap: 20px; 
+    padding: 10px;
 }
+
 
 .card-ingredient {
     position: relative;
-    width: 200px;
+    flex: 1 1 calc(30% - 20px); 
+    max-width: 300px; 
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     background-color: #fff;
     text-align: center;
     margin: 10px;
+}
+
+
+.title-ingredients {
+    margin-bottom: 10px;
 }
 
 .ingredient-btn {

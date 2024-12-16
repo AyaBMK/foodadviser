@@ -8,13 +8,14 @@
   width: 300px;
   margin: 0 auto;
   background-color: #f0f8ff;
-  border: 2px solid green;
+  border: none;
+  margin-top: -40px;
 }
 
 .image-upload-container h2 {
   font-size: 25px;
   margin-bottom: 20px;
-  color: green;
+  color: #46ab57;
   text-align: center;
 }
 
@@ -58,7 +59,7 @@
 /* Bouton pour soumettre l'image */
 .submit-button {
   padding: 10px 20px;
-  background-color: green;
+  background-color: #46ab57;
   color: white;
   border: none;
   border-radius: 5px;

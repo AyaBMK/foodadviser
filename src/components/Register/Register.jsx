@@ -1,5 +1,6 @@
 import React from 'react';
 import './Register.css';
+import { NavLink } from 'react-router-dom';
 
 export default function Register() {
   return (
@@ -63,11 +64,13 @@ export default function Register() {
           type="button"
           value="Je m'inscris"
         />
-        <input
-          className="inputButton-Sgn"
-          type="button"
-          value="Je me connecte"
-        />
+        <NavLink to={"/signin"}>
+          <input
+            className="inputButton-Sgn"
+            type="button"
+            value="Je me connecte"
+          />
+        </NavLink>
       </div>
     </div>
   );

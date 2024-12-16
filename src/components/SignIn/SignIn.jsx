@@ -1,5 +1,6 @@
 import React from 'react'
 import './SignIn.css'
+import { NavLink } from "react-router-dom"
 
 
 export default function SignIn() {
@@ -37,11 +38,13 @@ export default function SignIn() {
             type="button"
             value="Se connecter"
             />
-            <input
-            className="inputButton"
-            type="button"
-            value="Créer un compte"
-            />
+            <NavLink to={"/register"}>
+              <input
+              className="inputButton"
+              type="button"
+              value="Créer un compte"
+              />
+            </NavLink>
         </div>
       </div>
 

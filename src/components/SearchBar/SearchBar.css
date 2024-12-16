@@ -3,6 +3,10 @@
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+  padding: 0 10px;
+  margin-bottom: 40px;
+  position: relative;
+  top: -20px;
 }
 
 .searchbar-form {
@@ -13,6 +17,7 @@
   border-radius: 8px;
   padding: 5px;
   background-color: transparent;
+  max-width: 1200px;
 }
 
 .searchbar-input {
