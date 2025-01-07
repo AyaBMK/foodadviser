@@ -1,26 +1,26 @@
 .card-ingredient-container {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between; 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
     gap: 20px; 
-    padding: 10px;
+    padding: 20px;
 }
-
 
 .card-ingredient {
     position: relative;
-    flex: 1 1 calc(30% - 20px); 
-    max-width: 300px; 
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     background-color: #fff;
     text-align: center;
-    margin: 10px;
 }
 
+.card-image {
+    object-fit: cover; 
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
 
-.title-ingredients {
-    margin-bottom: 10px;
+.card-ingredient-content {
+    padding: 10px;
 }
 
 .ingredient-btn {
@@ -41,26 +41,21 @@
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.card-image {
-    width: 100%;
-    height: auto;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-.card-title {
-    margin: 10px 0;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-}
-
-
 .ingredient-btn:hover,
 .ingredient-btn:active {
     background-color: #368e58;
     transform: scale(1.1);
 }
 
+@media (max-width: 1024px) {
+    .card-ingredient-container {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
 
-
+/* Pour les écrans petits */
+@media (max-width: 768px) {
+    .card-ingredient-container {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}

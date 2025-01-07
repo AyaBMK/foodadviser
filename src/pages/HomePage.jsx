@@ -1,12 +1,12 @@
-import Recipes from "../components/Recipes/Recipes"
-import TopRecipes from "../components/TopRecipes/TopRecipes"
-import Ingredients from "../components/Ingredients/Ingredients"
+import React from "react";
+import Recipes from "../components/Recipes/Recipes";
+import TopRecipes from "../components/TopRecipes/TopRecipes";
+
 export default function HomePage() {
   return (
     <>
-        <Recipes />
-        <TopRecipes />
-        <Ingredients />
+      <Recipes limit={4} random={true} />
+      <TopRecipes />
     </>
-  )
+  );
 }

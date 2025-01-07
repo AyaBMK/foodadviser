@@ -11,6 +11,12 @@
     margin-left: auto; 
 }
 
-
-
-
+/*make the footer at the bottom of the page */
+html, body {
+    height: 100%; 
+}
+.app-container {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh; 
+}
