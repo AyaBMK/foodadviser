@@ -16,7 +16,7 @@ export default function Ingredients({ ingredients }) {
             className="card-image"
           />
           <div className="card-ingredient-content">
-            <h3>{ingredient.ingredient_name}</h3>
+            <h3>{ingredient.ingredient_name || ingredient.name}</h3>
             <p>
               {ingredient.amount} {ingredient.unit || ""}
             </p>

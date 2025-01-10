@@ -6,7 +6,7 @@ export const AppContext = createContext();
  
 
 const AppProvider = ({ children }) => {
-    const [sharedVariable, setSharedVariable] = useState(null);  
+    const [sharedVariable, setSharedVariable] = useState([]);  
     const [loading, setLoading] = useState(true);  
     const [error, setError] = useState(null);  
 

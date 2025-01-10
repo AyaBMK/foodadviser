@@ -6,7 +6,7 @@ import { AppContext } from '../../context/AppContext';
 import { categorizeIngredients, categorizedIng } from "../../utils/ingredientsUtils";
 import {getRecipesSuggestionList} from "../../services/api"
 import Recipes from "../Recipes/Recipes";
-import { data } from "react-router-dom";
+import PopUp from "../Popup/PopUp";
 
 export default function FridgeIngredients() {
 
@@ -15,6 +15,15 @@ export default function FridgeIngredients() {
   const [recipes, setRecipes] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true)
+  const [isPopupOpen, setIsPopupOpen] = useState(false); //popup
+  const [addedIngredient, setAddedIngredient] = useState("");
+
+  //from back 
+  const [ingIA, setIngIA]  = useState([{name: "chorizo"},
+    {name: "a squirt sriracha"},
+   {name: "block lite tofu"},
+   {name: "rocket leaves"},
+   {name: "lemon"},])
 
   //ingredient in fridge 
   //must be returned from backend 
@@ -46,21 +55,39 @@ export default function FridgeIngredients() {
   //   {name: "lemon"},
   //   {name: "short"},
   // ];  
-  const ingIA = [
-    
-      {name: "chorizo"},
-      {name: "a squirt sriracha"},
-     {name: "block lite tofu"},
-     {name: "rocket leaves"},
-     {name: "lemon"},
-      ]; 
+
   useEffect(() => {
     if (!loading && !error) {
       const result = categorizedIng(sharedVariable, ingIA);
       setCategorized(result);
     }
   }, [sharedVariable, loading, error]); 
+   
+  const togglePopup = () => setIsPopupOpen(!isPopupOpen);
+
+  const addIngredients = (ingredients) => {
+    setCategorized((currentState) => {
+      const newIngredients = ingredients.filter(
+        (ingredient) => !currentState.inFridge.some((ing) => ing.name === ingredient.name)
+      );
   
+      if (newIngredients.length === 0) {
+        return currentState;
+      }
+  
+      //add new ing to inFridge
+      return {
+        ...currentState,
+        inFridge: [...currentState.inFridge, ...newIngredients],
+      };
+    });
+  };
+
+  const handlePopupList = (addedIngredientList) => {
+    addIngredients(addedIngredientList)
+    togglePopup();
+  };
+
   useEffect(() => {
     if (categorized.inFridge.length > 0) {
       const fetchRecipes = async () => {
@@ -120,6 +147,10 @@ export default function FridgeIngredients() {
               </>
              
             )}
+            <div>
+              <button className= 'btn-added' onClick={togglePopup}>Add ingredien</button>
+              <PopUp isOpen={isPopupOpen} close={togglePopup} onSubmit={handlePopupList}/>
+            </div>
           </div>
         
         </div>
