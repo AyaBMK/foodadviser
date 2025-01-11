@@ -39,12 +39,14 @@ export default function DetailRecipe() {
 
         setRecipeDetails(data);
         // Fetch enriched ingredients only if needed
-        if (missedIng.length > 0 && data.ingredients.length > 0) {
-          const enriched = await mapMissedIngredients(missedIng, data.ingredients);
+        const data_ingredient= (data?.ingredients || data?.extendedIngredients)
+        if (missedIng.length > 0 && data_ingredient.length > 0 ) {
+          const enriched = await mapMissedIngredients(missedIng, data_ingredient);
           setEnrichedIngredients(enriched);
         }
       } catch (err) {
         setError("Erreur de connexion au serveur");
+        console.log(err)
       }
     };
 
@@ -59,25 +61,25 @@ export default function DetailRecipe() {
     return <p>Chargement des détails de la recette...</p>;
   }
 
-  const ingredients = recipeDetails.ingredients || []
-  const steps = recipeDetails.steps || [];  
+  const ingredients = recipeDetails.ingredients || recipeDetails.extendedIngredients || []
+  const steps = recipeDetails?.steps || recipeDetails?.analyzedInstructions[0].steps || [];  
 
     return (
         <div className="container">
           <h2>{recipeDetails.title}</h2>
           <img
-            src={recipeDetails.image_url || "default_image_url.jpg"}
+            src={recipeDetails.image_url || recipeDetails.image }
             alt={recipeDetails.title}
             className="recipe-image"
           /> 
           <h3 className="titlee">Ingrédients </h3>
-          <Ingredients ingredients={ingredients} />
+          <Ingredients ingredients={ingredients} showRemoveButton={false} />
           {isSuggestionPage && (
             <>
               <h3 className="titlee">Ingrédients dans le Frigo</h3>
-              <Ingredients ingredients={ingInFridge} />
+              <Ingredients ingredients={ingInFridge} showRemoveButton={true}/>
               <h3 className="titlee">Liste de course</h3>
-              <Ingredients ingredients={enrichedIngredients} />
+              <Ingredients ingredients={enrichedIngredients} showRemoveButton={true}/>
             </>
       )}
       <h3 className="titlee">Étapes </h3>

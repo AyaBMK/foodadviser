@@ -14,7 +14,7 @@ export default function FridgeIngredients() {
   const [categorized, setCategorized] = useState({ inFridge: [], toBuy: [] });
   const [recipes, setRecipes] = useState([]);
   const [fetchError, setFetchError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const [isPopupOpen, setIsPopupOpen] = useState(false); //popup
   const [addedIngredient, setAddedIngredient] = useState("");
 
@@ -90,6 +90,7 @@ export default function FridgeIngredients() {
 
   useEffect(() => {
     if (categorized.inFridge.length > 0) {
+      setIsLoading(true)
       const fetchRecipes = async () => {
         try {
           const data = await getRecipesSuggestionList(
@@ -155,10 +156,12 @@ export default function FridgeIngredients() {
         
         </div>
         {isLoading ? (
-            <div>Chargement des recettes...</div>
-          ) : (
-            <Recipes listRecipes={recipes} previousPage='recipesSuggestion' />
-          )}
+          <div>Chargement des recettes...</div>
+        ) : categorized.inFridge.length > 0 ? (
+          <Recipes listRecipes={recipes} previousPage="recipesSuggestion" />
+        ) : (
+          <div>Impossible de faire une suggestion de recette sans ingrédient</div>
+        )}
 
           
    </>
