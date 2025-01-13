@@ -2,7 +2,7 @@ import { FaMinus } from "react-icons/fa";
 import "./Ingredients.css";
 import toast from "../../assets/toast.webp";
 
-export default function Ingredients({ ingredients, showRemoveButton = false}) {
+export default function Ingredients({ ingredients, showRemoveButton = false,  onMoveIngredient }) {
   if (!ingredients || ingredients.length === 0) {
     return <p>Aucun ingrédient disponible.</p>;
   }
@@ -22,7 +22,8 @@ export default function Ingredients({ ingredients, showRemoveButton = false}) {
               {ingredient.amount} {ingredient.unit || ""}
             </p>
             {showRemoveButton && (
-              <button className="ingredient-btn">
+              <button className="ingredient-btn"
+              onClick={() => onMoveIngredient(ingredient)}>
                 <FaMinus />
               </button>
             )}

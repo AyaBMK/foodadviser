@@ -20,10 +20,11 @@ export default function DetailRecipe() {
 
 
   let isSuggestionPage = fromPage.includes('recipesSuggestion')
-  const [enrichedIngredients, setEnrichedIngredients] = useState([]);
 
 
-  const { ingToShop, ingInFridge} = useContext(AppContext);
+  const { setToShop, ingToShop, setInFridge, ingInFridge} = useContext(AppContext);
+  const [localIngInFridge, setLocalIngInFridge] = useState(ingInFridge || []);
+  const [localEnrichedIngredients, setLocalEnrichedIngredients] = useState([]);
 
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [error, setError] = useState(null);
@@ -42,7 +43,7 @@ export default function DetailRecipe() {
         const data_ingredient= (data?.ingredients || data?.extendedIngredients)
         if (missedIng.length > 0 && data_ingredient.length > 0 ) {
           const enriched = await mapMissedIngredients(missedIng, data_ingredient);
-          setEnrichedIngredients(enriched);
+          setLocalEnrichedIngredients(enriched);
         }
       } catch (err) {
         setError("Erreur de connexion au serveur");
@@ -52,6 +53,20 @@ export default function DetailRecipe() {
 
     fetchRecipeDetailsWithIngredients();
   }, []);
+
+  const moveToShoppingList = (ingredient) => {
+    setLocalIngInFridge((prev) => prev.filter((item) => item !== ingredient));
+    setLocalEnrichedIngredients((prev) => [...prev, ingredient]);
+    //set context variables 
+    setInFridge(localIngInFridge)
+  };
+
+  const moveToFridge = (ingredient) => {
+    setLocalEnrichedIngredients((prev) => prev.filter((item) => item !== ingredient));
+    setLocalIngInFridge((prev) => [...prev, ingredient]);
+    //set context variables 
+    setInFridge(localIngInFridge)
+  };
 
   if (error) {
     return <p className="error-message">{error}</p>;
@@ -77,9 +92,9 @@ export default function DetailRecipe() {
           {isSuggestionPage && (
             <>
               <h3 className="titlee">Ingrédients dans le Frigo</h3>
-              <Ingredients ingredients={ingInFridge} showRemoveButton={true}/>
+              <Ingredients ingredients={localIngInFridge} showRemoveButton={true} onMoveIngredient={moveToShoppingList}/>
               <h3 className="titlee">Liste de course</h3>
-              <Ingredients ingredients={enrichedIngredients} showRemoveButton={true}/>
+              <Ingredients ingredients={localEnrichedIngredients} showRemoveButton={true} onMoveIngredient={moveToFridge}/>
             </>
       )}
       <h3 className="titlee">Étapes </h3>
