@@ -25,19 +25,6 @@ export const getRecipesList = async (number = 10) => {
   }
 };
 
-export const getRecipesSuggestionList = async (ingredientList, number=8)=> {
-  try {
-    const ingredients= ingredientList.join(',+')
-    const url = `${API_BASE_URL}/recipes/recipesSuggestion/?list=${ingredients}&number=${number}`;
-    console.log("Request URL:", url);
-    const response = await axios.get(url)
-    return response.data;
-  } catch (error) {
-    console.error('Error fetching recipes list:', error);
-    return { error: error.message };
-  }
-}
-
 // Autocomplétion des recettes
 export const getRecipesAutocomplete = async (query, number = 10) => {
 try {
@@ -54,33 +41,46 @@ try {
 // Upload d'image
 export const uploadImage = async (formData) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/image_manager/upload/`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
+    const { data } = await axios.post(`${API_BASE_URL}/image_manager/upload/`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
-    return response.data;
+    return data;
   } catch (error) {
     console.error('Erreur lors de l’envoi de l’image :', error);
     return { error: error.message };
   }
 };
 
+export const getRecipesSuggestionList = async (ingredientList, number = 8) => {
+  try {
+    const names = (ingredientList || [])
+      .map(it => (typeof it === 'string' ? it : it?.name))
+      .filter(Boolean);
+
+    const listParam = names.map(n => encodeURIComponent(n)).join(','); // "tomato,cheese,onion"
+    const url = `${API_BASE_URL}/recipes/recipesSuggestion/?list=${listParam}&number=${number}`;
+    const { data } = await axios.get(url);
+    return data;
+  } catch (error) {
+    const msg = error?.response?.data?.error
+      || (error?.response ? `HTTP ${error.response.status}` : error.message);
+    console.error('Error fetching recipes suggestions:', msg);
+    return { error: msg };
+  }
+};
+
+
 export const viewRecipe = async (recipeTitle) => {
   try {
-    const token = authService.getAccessToken(); // Récupère le token
-    const response = await axios.post(
-      `${API_BASE_URL}/recommandations/view_recipe/${recipeTitle}/`,
-      {}, 
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+    const token = authService.getAccessToken();
+    const { data } = await axios.post(
+      `${API_BASE_URL}/recommandations/view_recipe/`,
+      { recipe_title: recipeTitle }, 
+      { headers: { Authorization: `Bearer ${token}` } }
     );
-    return response.data;
+    return data;
   } catch (error) {
-    console.error("Erreur lors de l'enregistrement de la recette consultée :", error);
+    console.error("Erreur viewRecipe:", error?.response?.data || error.message);
     throw error;
   }
 };

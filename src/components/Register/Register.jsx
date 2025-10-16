@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './Register.css';
 import { useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
+import { checkPasswordStrength } from "../../utils/password";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -16,30 +17,43 @@ export default function Register() {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    if (password !== confirmPassword) {
-      setError("Les mots de passe ne correspondent pas.");
-      return;
-    }
-    if (!email || !pseudo || !password || !birthdate || !gender) {
-      setError("Veuillez remplir tous les champs.");
-      return;
-    }
+   
+  if (!email || !pseudo || !password || !confirmPassword || !birthdate || !gender) {
+    setError("Veuillez remplir tous les champs.");
+    return;
+  }
+  
+  if (password !== confirmPassword) {
+    setError("Les mots de passe ne correspondent pas.");
+    return;
+  }
 
-    try {
-      const response = await axios.post("http://127.0.0.1:8000/users/register/", {
-        email,
-        username: pseudo,
-        password,
-        birthdate,
-        gender,
-      });
-      setSuccess("Inscription réussie !");
-      setError("");
-      setTimeout(() => navigate("/signin"), 2000);  
-    } catch (err) {
-      setError(err.response?.data?.message || "Une erreur est survenue.");
-    }
-  };
+  const { ok, message } = checkPasswordStrength(password);
+  if (!ok) {
+    setError(message);
+    return;
+  }
+
+  if (!email || !pseudo || !password || !birthdate || !gender) {
+    setError("Veuillez remplir tous les champs.");
+    return;
+  }
+
+  try {
+    const response = await axios.post("http://127.0.0.1:8000/users/register/", {
+      email,
+      username: pseudo,
+      password,
+      birthdate,
+      gender,
+    });
+    setSuccess("Inscription réussie !");
+    setError("");
+    setTimeout(() => navigate("/signin"), 1500);
+  } catch (err) {
+    setError(err.response?.data?.message || "Une erreur est survenue.");
+  }
+};
 
   return (
     <div className="mainContainer">
