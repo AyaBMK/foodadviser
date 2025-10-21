@@ -60,7 +60,7 @@ function Navbar() {
 				<div className="connexion-container">
 				{isLoggedIn ? (
 					<>						
-						<button onClick={downloadShoppingList}>Telecharger la liste</button>
+						{/* <button onClick={downloadShoppingList}>Telecharger la liste</button> */}
 						<LogoutButton />
 					</>
 					) : (

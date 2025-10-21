@@ -149,7 +149,7 @@ export default function DetailRecipe() {
                     Télécharger
                   </button>
 
-                  <button
+                  {/* <button
                     style={{
                       backgroundColor: "#45AA6D",
                       color: "white",
@@ -172,7 +172,7 @@ export default function DetailRecipe() {
                     }}
                   >
                     Ajouter à la liste de courses
-                  </button>
+                  </button> */}
                 </>
               )}
             </>

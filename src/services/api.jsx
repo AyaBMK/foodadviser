@@ -84,3 +84,39 @@ export const viewRecipe = async (recipeTitle) => {
     throw error;
   }
 };
+
+
+axios.defaults.baseURL = "http://127.0.0.1:8000"; // ou import.meta.env.VITE_API_URL
+
+// Pour éviter d'enregistrer 2x les intercepteurs en dev (HMR), on garde un flag global
+if (!window.__axiosInterceptorsRegistered) {
+  window.__axiosInterceptorsRegistered = true;
+
+  // 1) Ajouter automatiquement le Bearer sur chaque requête
+  axios.interceptors.request.use((config) => {
+    const token = authService.getAccessToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
+
+  // 2) Si 401 (token expiré/invalide) => déconnexion + redirection /signin
+  axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      const status = error?.response?.status;
+      if (status === 401) {
+        // Optionnel: ne pas déclencher sur /users/token/ ou /users/register/
+        const url = error?.config?.url || "";
+        const isAuthUrl = url.includes("/users/token/") || url.includes("/users/register/");
+        if (!isAuthUrl) {
+          authService.logout();
+          window.location.href = "/signin"; // redirection immédiate
+          return; // on stoppe ici
+        }
+      }
+      return Promise.reject(error);
+    }
+  );
+}

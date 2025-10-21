@@ -8,13 +8,14 @@ const login = async (username, password) => {
       username,
       password,
     });
-    // Stock tokens in local storage
+    
     localStorage.setItem("access", response.data.access);
     localStorage.setItem("refresh", response.data.refresh);
     return response.data;
   } catch (error) {
-    throw new Error("Invalid username or password");
-  }
+    const msg = error?.response?.data?.detail || "Identifiants invalides";
+    throw new Error(msg);
+}
 };
 
 const logout = () => {
@@ -32,3 +33,5 @@ const logout = () => {
     getAccessToken,
     isAuthenticated,
   };
+
+  

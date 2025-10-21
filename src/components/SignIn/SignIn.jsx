@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 
 export default function SignIn() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function SignIn() {
 
   const handleSubmit = async () => {
     try {
-      const user = await authService.login(email, password); 
+      const user = await authService.login(username, password); 
       login(user)
       navigate("/");
     } catch (err) {
@@ -30,9 +30,9 @@ export default function SignIn() {
     <br />
     <div className="inputContainer">
       <input
-        value={email}
+        value={username}
         placeholder="Pseudo"
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setUsername(e.target.value)}
         className="inputBox"
       />
     </div>
