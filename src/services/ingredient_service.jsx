@@ -1,75 +1,74 @@
-import axios from 'axios';
+// src/services/ingredient_service.jsx
+import { api } from './api';
 
-let API_BASE_URL =`${import.meta.env.API_BASE_URL}/ingredients/`
-API_BASE_URL =`http://127.0.0.1:8000/ingredients`
+const ING = '/ingredients';
 
 export const get_all_ingredients = async () => {
-    try {
-      const response = await axios.get('http://127.0.0.1:8000/ingredients/list/')
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching ingredients:', error)
-      return { error: error.message }
-    }
-}
+  try {
+    const { data } = await api.get(`${ING}/list/`);
+    return data;
+  } catch (error) {
+    console.error('Error fetching ingredients:', error);
+    return { error: error.message };
+  }
+};
 
 export const get_ingredients_by_id = async (ingredient_id) => {
-    try {
-        const response = await axios.get(`${API_BASE_URL}/${ingredient_id}`);
-        return response.data;
-      } catch (error) {
-        console.error('Error fetching ingredients:', error);
-        return { error: error.message };
-      }
-}
-
+  try {
+    const { data } = await api.get(`${ING}/${ingredient_id}/`);
+    return data;
+  } catch (error) {
+    console.error('Error fetching ingredients:', error);
+    return { error: error.message };
+  }
+};
 
 export const get_all_name_ingredients = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/list_name_ingredient/`);
-      return response.data
-    } catch (error) {
-      console.error('Error fetching ingredients:', error)
-      return { error: error.message }
-    }
-}
+  try {
+    const { data } = await api.get(`${ING}/list_name_ingredient/`);
+    return data;
+  } catch (error) {
+    console.error('Error fetching ingredients:', error);
+    return { error: error.message };
+  }
+};
 
-export const get_name_by_id = async(ingredient_id) => {
-    try {
-        const response = await axios.get(`${API_BASE_URL}/ingredient_name/${ingredient_id}/`);
-        return response.data;
-      } catch (error) {
-        console.error('Error fetching ingredients:', error);
-        return { error: error.message };
-      }
-}
+export const get_name_by_id = async (ingredient_id) => {
+  try {
+    const { data } = await api.get(`${ING}/ingredient_name/${ingredient_id}/`);
+    return data;
+  } catch (error) {
+    console.error('Error fetching ingredients:', error);
+    return { error: error.message };
+  }
+};
 
-export const post_ingredient = async(ingredient)=> {
-    try {  
-        const response = await axios.put(`${API_BASE_URL}/add_ingredient/`, ingredient);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching ingredients:', error);
-        return { error: error.message };
-    }
-}
+export const post_ingredient = async (ingredient) => {
+  try {
+    const { data } = await api.post(`${ING}/add_ingredient/`, ingredient);
+    return data;
+  } catch (error) {
+    console.error('Error posting ingredient:', error);
+    return { error: error.message };
+  }
+};
 
-export const put_ingredient = async()=> {
-    try {  
-        const response = await axios.put(`${API_BASE_URL}/put_ingredient/`, ingredient);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching ingredients:', error);
-        return { error: error.message };
-    }
-}
+export const put_ingredient = async (ingredient) => {
+  try {
+    const { data } = await api.put(`${ING}/put_ingredient/`, ingredient);
+    return data;
+  } catch (error) {
+    console.error('Error putting ingredient:', error);
+    return { error: error.message };
+  }
+};
 
-export const delete_ingredient = async(ingredient_id)=> {
-    try {
-        const response = await axios.delete(`${API_BASE_URL}/delete_ingredient/${ingredient_id}`);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching ingredients:', error);
-        return { error: error.message };
-    }
-}
+export const delete_ingredient = async (ingredient_id) => {
+  try {
+    const { data } = await api.delete(`${ING}/delete_ingredient/${ingredient_id}/`);
+    return data;
+  } catch (error) {
+    console.error('Error deleting ingredient:', error);
+    return { error: error.message };
+  }
+};

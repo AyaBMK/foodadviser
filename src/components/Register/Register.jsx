@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './Register.css';
 import { useNavigate, NavLink } from "react-router-dom";
-import axios from "axios";
+import { api } from "../../services/api";
 import { checkPasswordStrength } from "../../utils/password";
 
 export default function Register() {
@@ -34,21 +34,22 @@ export default function Register() {
     return;
   }
 
+  // ...
   try {
-    const response = await axios.post("http://127.0.0.1:8000/users/register/", {
-      email,
-      username: pseudo,
-      password,
-      birthdate,
-      gender,
-    });
-    setSuccess("Inscription réussie !");
-    setError("");
-    setTimeout(() => navigate("/signin"), 1500);
-  } catch (err) {
-    setError(err.response?.data?.message || "Une erreur est survenue.");
-  }
-};
+      const { data } = await api.post(`/users/register/`, {
+        email,
+        username: pseudo,
+        password,
+        birthdate,
+        gender,
+      });
+      setSuccess("Inscription réussie !");
+      setError("");
+      setTimeout(() => navigate("/signin"), 1500);
+    } catch (err) {
+      setError(err.response?.data?.message || "Une erreur est survenue.");
+    }
+  };
 
   return (
     <div className="mainContainer">
