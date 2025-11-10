@@ -73,41 +73,40 @@ export function categorizedIng(ingredientsList, fridgeIngredients){
 async function fetchIngredientDetails(ingredientId) {
   try {
     const response = await get_ingredients_by_id(ingredientId);
-    if (response.error) {
-      throw new Error(`Erreur lors de la récupération de l'ingrédient : ${response.statusText}`);
-    }
-    return response
-  } catch (error) {
-    return null;  
+    if (response?.error) throw new Error(response.error);
+    return response; // { name, image_url, id_ingredient } (selon ta view)
+  } catch {
+    return null;
   }
 }
 
-export async function mapMissedIngredients(missedIng, allIngredients) {
-  const enrichedIngredients = await Promise.all(
-    missedIng.map(async (missed) => {
-      const ingredientDetails = await fetchIngredientDetails(missed.id);
-      if (!ingredientDetails) {
-        console.warn(`Aucun détail pour l'ingrédient ID ${missed.id}`);
+// ingredientsUtils.jsx
+export async function mapMissedIngredients(missedIng) {
+  const enriched = await Promise.all(
+    (missedIng || []).map(async (m) => {
+      const details = await fetchIngredientDetails(m.id); // renvoie {name, image_url, ...}
+
+      if (details && (details.name || details.image_url)) {
         return {
-          id: missed.id,
-          ingredient_name: `Ingrédient inconnu (${missed.id})`,
-          image_url: "default_image_url.jpg",
-          amount: missed.amount,
-          unit: missed.unit || "",
+          id: m.id,
+          ingredient_name: details.name,
+          image_url: details.image_url || null, // <-- URL absolue si trouvée en BDD
+          amount: m.amount,
+          unit: m.unit || '',
         };
-      }  
-      const matchedIngredient = allIngredients.find(ingredient => 
-        ingredient?.ingredient_name?.toLowerCase() === ingredientDetails?.name?.toLowerCase()
-      );      
+      }
+
+      // Fallback Spoonacular : on garde le filename (PAS d'URL)
       return {
-        id: missed.id,
-        ingredient_name: ingredientDetails.name,
-        image_url: ingredientDetails ? ingredientDetails.image : "default_image_url.jpg",
-        amount: missed.amount,
-        unit: missed.unit || "",
+        id: m.id,
+        ingredient_name: m.name || `ingredient ${m.id}`,
+        image: m.image || null, // <-- filename
+        amount: m.amount,
+        unit: m.unit || '',
       };
     })
   );
-
-  return enrichedIngredients;
+  return enriched;
 }
+
+

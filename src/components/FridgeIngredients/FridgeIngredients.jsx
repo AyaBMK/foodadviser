@@ -48,16 +48,22 @@ export default function FridgeIngredients() {
 
   const togglePopup = () => setIsPopupOpen(x => !x);
 
+  const normalize = (s = "") =>
+  s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+
   const handlePopupList = (addedIngredientList) => {
-    setCategorized((current) => {
-      const updatedInFridge = addedIngredientList
-        .reduce((acc, ing) => {
-          const name = (ing?.name || "").trim();
-          if (name && !acc.some(x => x.name === name)) acc.push({ name });
-          return acc;
-        }, []);
-      return { ...current, inFridge: updatedInFridge };
-    });
+    // addedIngredientList contient déjà les objets complets (depuis IngredientList)
+    const seen = new Set();
+    const updatedInFridge = [];
+
+    for (const ing of addedIngredientList || []) {
+      const name = normalize(ing?.name);
+      if (!name || seen.has(name)) continue;
+      updatedInFridge.push(ing);       // ✅ on garde l’objet complet
+      seen.add(name);
+    }
+
+    setCategorized((cur) => ({ ...cur, inFridge: updatedInFridge }));
     togglePopup();
   };
 
@@ -144,7 +150,7 @@ export default function FridgeIngredients() {
       {isLoading ? (
         <div className="loading-spinner"></div>
       ) : categorized.inFridge.length > 0 ? (
-        <Recipes listRecipes={recipes} previousPage="recipesSuggestion" />
+        <Recipes listRecipes={recipes} previousPage="recipesSuggestion" fridge={categorized.inFridge} />
       ) : (
         <div>Impossible de faire une suggestion de recette sans ingrédient</div>
       )}

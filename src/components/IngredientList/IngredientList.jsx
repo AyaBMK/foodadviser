@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from 'react'
 import { AppContext } from '../../context/AppContext';
 import './IngredientList.css'
 import toast from "../../assets/toast.webp";
+import { getIngredientImgSrc } from "../../utils/img";
 
 export default function IngredientList({addOrRemoveIng, confirmedIngredients}) {
   const { sharedVariable} = useContext(AppContext);
@@ -63,7 +64,7 @@ export default function IngredientList({addOrRemoveIng, confirmedIngredients}) {
         <div key={index} className="ingredient-card">
           <h3 className="ingredient-name">{ingredient.name}</h3>
           <img
-            src={ingredient.image_url || toast}
+            src={getIngredientImgSrc(ingredient) || undefined}
             alt={ingredient.name}
             className="card-image-lsting"
           />

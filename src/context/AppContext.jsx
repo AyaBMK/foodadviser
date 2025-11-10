@@ -10,7 +10,22 @@ const AppProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);  
     const [error, setError] = useState(null);  
 
-    const [ingInFridge, setInFridge]= useState([])
+    // Dans AppContext (ou là où tu gères ingInFridge)
+    const [ingInFridge, setInFridge] = useState(() => {
+    try {
+        const raw = localStorage.getItem('ingInFridge');
+        return raw ? JSON.parse(raw) : [];
+    } catch {
+        return [];
+    }
+    });
+
+    useEffect(() => {
+    try {
+        localStorage.setItem('ingInFridge', JSON.stringify(ingInFridge || []));
+    } catch {}
+    }, [ingInFridge]);
+
     const [ingToShop, setToShop]= useState([])
     const [userIngToShop, setuserIngToShop]= useState([])
     const [fridgeImage, setFridgeImage] = useState(null);
